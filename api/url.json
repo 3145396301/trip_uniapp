@@ -1,0 +1,40 @@
+{
+  "proxy": false,
+  "serviceUri": {
+    "user": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9002,
+      "proxyPrefix": "/user",
+      "context": "/user",
+      "login": "/login",
+      "loginTest": "/loginTest",
+      "updateCoordinates": "/UpdatingCoordinates",
+      "searchLocation": "/Searching"
+    },
+    "itinerary": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9004,
+      "proxyPrefix": "/itinerary",
+      "context": "/itinerary",
+      "getPlan": "/getPlan",
+      "startItinerary": "/startItinerary",
+      "getAllVehicleType" : "/getAllVehicleType",
+      "getAllItinerary": "/getAllItinerary",
+      "getNearbyOrders": "/getNearbyOrders/",
+      "getOrder": "/getOrder/",
+      "tripHistory": "/tripHistory/",
+      "cancelItinerary": "/cancelItineraryById/",
+      "delItinerary": "/delItineraryById/"
+    },
+    "onLine": {
+      "protocol": "ws",
+      "serverHost": "127.0.0.1",
+      "port": 9002,
+      "proxyPrefix": "",
+      "context": "",
+      "onlineVerification": "/onlineVerification"
+    }
+  }
+}

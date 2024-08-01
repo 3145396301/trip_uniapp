@@ -1,0 +1,16 @@
+<!--components/captcha/index/index.wxml-->
+<view class="tianai-captcha-parent" style="background-image: url('/static/纹理.png')">
+  <view class="tianai-captcha-box" style="transform: translateX({{transformX}}px);">
+    <slider-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'SLIDER')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></slider-captcha>
+    <click-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'WORD_IMAGE_CLICK'|currentCaptcha.target.captcha.type == 'IMAGE_CLICK'| currentCaptcha.target.captcha.type == 'HONEYCOMB_IMAGE_CLICK'| currentCaptcha.target.captcha.type == 'WORD_ORDER_IMAGE_CLICK')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></click-captcha>
+    <rotate-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'ROTATE')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></rotate-captcha>
+    <concat-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'CONCAT')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></concat-captcha>
+    <curve-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'CURVE')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></curve-captcha>
+    <slider2-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'SLIDER2')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></slider2-captcha>
+    <rotate-degree-captcha wx:if="{{(currentCaptcha.target.captcha.type == 'ROTATE_DEGREE')}}" captcha-data="{{currentCaptcha.target.captcha}}" tip="{{tip}}" bind:captchaValid="captchaValid"></rotate-degree-captcha>
+  </view>
+  <view class="slider-bottom">
+    <view class="close-btn" bind:tap="closeFun"></view>
+    <view class="refresh-btn" bind:tap="refresh"></view>
+  </view>
+</view>

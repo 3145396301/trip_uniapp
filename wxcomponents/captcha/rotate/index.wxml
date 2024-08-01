@@ -1,0 +1,32 @@
+<!--components/captcha/slider/index.wxml-->
+<view class="tianai-captcha-rotate">
+    <view class="tip">
+        <view class="move-track-font">拖动滑块完成拼图</view>
+    </view>
+    <view class="content">
+        <view class="bg-img-div">
+            <image bindload="onBgImageLoad" class="bg-img" src="{{captchaData.backgroundImage}}"></image>
+            <view class="bg-div">
+                <view class="bg-div-slice"
+                    wx:for="{{sliceArr}}" wx:for-item="slice" wx:key="a" style="{{slice.b}}"></view>
+            </view>
+        </view>
+        <view class="rotate-img-div" style=" transform: rotate({{rotateDeg}}deg)">
+            <image class="rotate-move-img" src="{{captchaData.templateImage}}"></image>
+        </view>
+        <view class="{{['tips', tip.showTips&&'tips-on',(tip.type==1)&&'tips-success', (tip.type!=1)&& 'tips-error']}}" id="tips">
+            {{tip.msg}}
+        </view>
+    </view>
+    <view class="slider-move">
+        <view class="slider-move-track">
+            <view class="slider-move-track-mask" style="width: {{sliderMove}}px;"></view>
+            <view class="slider-move-btn"
+                  style=" transform: translate({{sliderMove}}px, 0px)"
+                  bind:touchstart="touchstart"
+                  bind:touchmove="touchmove"
+                  bind:touchend="touchend"></view>
+        </view>
+    </view>
+</view>
+

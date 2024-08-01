@@ -1,0 +1,12 @@
+{
+  "component": true,
+  "usingComponents": {
+    "slider-captcha":"../slider",
+    "click-captcha":"../click",
+    "rotate-captcha": "../rotate",
+    "concat-captcha": "../concat",
+    "curve-captcha":"../curve",
+    "slider2-captcha":"../slider2",
+    "rotate-degree-captcha": "../rotate_degree"
+  }
+}

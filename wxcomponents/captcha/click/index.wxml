@@ -1,0 +1,23 @@
+<!--components/captcha/click/index.wxml-->
+<view class="tianai-captcha-word-click">
+    <view class="click-tip">
+        <view class="move-track-font">请依次点击:{{tip.val}}</view>
+        <image class="tip-img" src="{{captchaData.templateImage}}"></image>
+    </view>
+    <view class="content">
+        <view class="bg-img-div">
+            <image  bindload="onBgImageLoad" class="bg-img" src="{{captchaData.backgroundImage}}"></image>
+            <view class="bg-div">
+                <view class="bg-div-slice"
+                    wx:for="{{sliceArr}}" wx:for-item="slice" wx:key="a" style="{{slice.b}}"></view>
+            </view>
+            <view class="bg-img-click-mask" id="bg-img-click-mask" bindtap="click">
+                <view class="click-span" wx:for="{{spans}}" wx:key="index" style="left: {{item.left}}px; top: {{item.top}}px;display: block;">{{item.val}}</view>
+            </view>
+        </view>
+        <view class="{{['tips', tip.showTips&&'tips-on',(tip.type==1)&&'tips-success', (tip.type!=1)&& 'tips-error']}}" id="tips">
+            {{tip.msg}}
+        </view>
+    </view>
+</view>
+
