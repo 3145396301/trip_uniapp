@@ -25,6 +25,10 @@ let urlObj={
         tripHistory: itineraryBaseUrl+json.serviceUri.itinerary.tripHistory,
         cancelItinerary: itineraryBaseUrl+json.serviceUri.itinerary.cancelItinerary,
         delItinerary: itineraryBaseUrl+json.serviceUri.itinerary.delItinerary,
+        inProgress: itineraryBaseUrl+json.serviceUri.itinerary.inProgress,
+        endItinerary: itineraryBaseUrl+json.serviceUri.itinerary.endItinerary,
+
+
     },
     onLine:{
         onlineVerification: onlineBaseUrl+json.serviceUri.onLine.onlineVerification
