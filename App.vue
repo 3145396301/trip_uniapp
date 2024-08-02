@@ -23,6 +23,6 @@ import userGeocoding from "./data/userGeocoding";
 <style>
 	/*每个页面公共css */
   page {
-    font-family: cursive;
+    font-family: "Microsoft YaHei UI Light";
   }
 </style>

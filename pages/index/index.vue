@@ -34,6 +34,9 @@ export default {
     uni.navigateTo({
       url: "login/loginPage"
     })
+    // uni.navigateTo({
+    //   url: "/pages/index/MyOrder/MyOrder"
+    // })
 
   },
   methods: {}

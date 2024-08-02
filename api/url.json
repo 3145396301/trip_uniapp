@@ -26,7 +26,8 @@
       "getOrder": "/getOrder/",
       "tripHistory": "/tripHistory/",
       "cancelItinerary": "/cancelItineraryById/",
-      "delItinerary": "/delItineraryById/"
+      "delItinerary": "/delItineraryById/",
+      "evaluateItinerary": "/evaluateOrUpdateItinerary"
     },
     "onLine": {
       "protocol": "ws",

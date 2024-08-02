@@ -54,6 +54,12 @@
 			"style": {
 				"navigationBarTitleText": "联系"
 			}
+		},
+		{
+			"path": "pages/index/MyOrder/MyOrder",
+			"style": {
+				"navigationBarTitleText": "我的订单"
+			}
 		}
 	],
 	"globalStyle": {
