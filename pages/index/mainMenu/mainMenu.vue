@@ -15,6 +15,7 @@
     <div class="right-top">
       <image src="/static/卡卷.png" class="icon"></image>
       <image src="/static/行程.png" class="icon" @click="toPageMyIterary"></image>
+      <image src="/static/订单.png" class="icon" @click="toPageMyOrder"></image>
     </div>
     <!-- 滑动上层窗口 -->
     <div class="fun" :style="{ top: funTop + 'px' }" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
@@ -295,6 +296,12 @@ export default {
       uni.navigateTo({
         url: '/pages/index/MyItinerary/MyItinerary'
       })
+    },
+    toPageMyOrder(){
+      uni.navigateTo({
+        url: "/pages/index/MyOrder/MyOrder"
+      })
+
     },
     receivedChatMessageEventCallback(data){
       uni.showToast({

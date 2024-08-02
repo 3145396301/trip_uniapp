@@ -3,13 +3,16 @@
     <div class="transaction-item" v-for="(item, index) in transactions" :key="index">
       <div class="transaction-header" @click="toggleDetails(index)">
         <div class="transaction-info">
-          <span class="date-time">创建时间：{{item.createTime}}</span>
-          <span class="reason">原因： {{item.reason}}</span>
-          <span class="status">状态： {{item.status==0?"未支付":item.status==1?"已支付":item.status==2?"已退款":item.status==3?"已取消":"未知"}}</span>
+          <span class="date-time">创建时间：{{ item.createTime }}</span>
+          <span class="reason">原因： {{ item.reason }}</span>
+          <span class="status-noPay" v-if="item.status == 0">状态： 未支付</span>
+          <span class="status-pay" v-if="item.status == 1">状态： 已支付</span>
+          <span class="status-refund" v-if="item.status == 2">状态： 已退款</span>
+          <span class="status-cancel" v-if="item.status == 3">状态： 已取消</span>
           <span class="order-number">订单号: {{ item.orderNumber }}</span>
         </div>
         <div class="arrow-icon" :class="{ expanded: item.expanded }">
-          <image style="width: 32px;height: 25px;" src="/static/向下箭头.png" alt="arrow-icon" />
+          <image style="width: 32px;height: 25px;" src="/static/向下箭头.png" alt="arrow-icon"/>
         </div>
       </div>
       <transition name="fade">
@@ -29,6 +32,12 @@
           <div class="detail-item" v-if="item.status == 2">
             <span>退款时间</span><span>{{ item.refundTime }}</span>
           </div>
+          <div>
+            <button class="pay-button" v-if="item.status == 0">支付</button>
+            <button class="pay-button" v-if="item.status == 0 && item.reason != '行程'">取消</button>
+            <button class="pay-button" v-if="item.status == 0 && item.reason == '行程'" disabled>取消</button>
+            <button class="refund-button" v-if="item.status == 1">退款</button>
+          </div>
 
         </div>
       </transition>
@@ -46,7 +55,7 @@ export default {
           initialCost: 5000.00,
           actualCost: 5000.00,
           discountAmount: 0.00,
-          status: 2, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+          status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
           createTime: "2018-04-29",
           paymentTime: "2018-04-29 10:06:02",
           refundTime: "2018-04-29 10:06:02",
@@ -58,11 +67,11 @@ export default {
           initialCost: 5000.00,
           actualCost: 5000.00,
           discountAmount: 0.00,
-          status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+          status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
           createTime: "2018-04-29",
           paymentTime: "2018-04-29 10:06:02",
           refundTime: "",
-          reason: "行程",
+          reason: "购买优惠券",
           expanded: false
         },
         {
@@ -82,7 +91,7 @@ export default {
           initialCost: 5000.00,
           actualCost: 5000.00,
           discountAmount: 0.00,
-          status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+          status: 2, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
           createTime: "2018-04-29",
           paymentTime: "2018-04-29 10:06:02",
           refundTime: "",
@@ -94,7 +103,7 @@ export default {
           initialCost: 5000.00,
           actualCost: 5000.00,
           discountAmount: 0.00,
-          status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+          status: 3, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
           createTime: "2018-04-29",
           paymentTime: "2018-04-29 10:06:02",
           refundTime: "",
@@ -129,7 +138,11 @@ export default {
   cursor: pointer;
   transition: box-shadow 0.3s ease;
   position: relative;
+  outline: none; /* 移除聚焦时的默认外边框 */
+  user-select: none; /* 禁止用户选择文本 */
+  -webkit-tap-highlight-color: transparent; /* 移除点击时的蓝色高亮效果 */
 }
+
 
 .transaction-item::before {
   content: '';
@@ -143,7 +156,7 @@ export default {
 }
 
 .transaction-item:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  //box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .transaction-header {
@@ -163,10 +176,23 @@ export default {
   font-size: 14px;
 }
 
-.status {
+.status-noPay {
   color: #f56c6c;
-  font-weight: bold; /* 状态文本加粗 */
+  font-weight: bold;
 }
+.status-pay {
+  color: #67c23a;
+  font-weight: bold;
+}
+.status-refund {
+  color: #e6a23c;
+  font-weight: bold;
+}
+.status-cancel {
+  color: #909399;
+  font-weight: bold;
+}
+
 .reason {
   color: #402ce4;
   font-weight: bold; /* 状态文本加粗 */
@@ -207,13 +233,20 @@ export default {
   color: #409eff; /* 右侧金额文本颜色 */
 }
 
-/* 过渡动画 */
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease, max-height 0.3s ease;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active for <2.1.8 */ {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
+.pay-button, .refund-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #409eff;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 20%;
+  height: 6vh;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 3vh;
+  display: inline-block;
+  margin: 10px;
 }
 </style>
