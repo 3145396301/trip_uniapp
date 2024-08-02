@@ -29,25 +29,30 @@
           <span>{{ userGeocoding.locationStr }}</span>
         </div>
         <div class="search-box">
-          <h1>目标地点：</h1>
           <div>
-            <span>北京大学</span>
+            <div v-for="item in inProgress" :key="item.id">
+              <h1>目标地点：</h1>
+              <div>
+                <span>{{item.endDetail}}</span>
+              </div>
+              <button @click="searchRoute(item.endLongitudeLatitude)">开始导航</button>
+              <button @click="toChatPage(item.id)">联系乘客</button>
+              <button @click="endTheTrip(item.id)">结束行程</button>
+            </div>
           </div>
-          <button>开始行程</button>
-          <button>联系乘客</button>
-          <button>结束行程</button>
+
         </div>
         <div class="search-box">
-          <h1 style="text-align: center">暂无订单</h1>
+          <h1 style="text-align: center" v-if="inProgress==null||inProgress.length==0">暂无订单</h1>
         </div>
         <!-- 路线信息 -->
-        <div v-if="polylineNum != '0'" class="picker-container">
-          <picker mode="selector" :range="paths" range-key="info" @change="displayRoute">
-            <view class="picker">
-              预览路线
-            </view>
-          </picker>
-        </div>
+<!--        <div v-if="polylineNum != '0'" class="picker-container">-->
+<!--          <picker mode="selector" :range="paths" range-key="info" @change="displayRoute">-->
+<!--            <view class="picker">-->
+<!--              预览路线-->
+<!--            </view>-->
+<!--          </picker>-->
+<!--        </div>-->
       </div>
     </div>
   </view>
@@ -80,12 +85,41 @@ export default {
       vehicleTypeList: [],  // demo:{"id":1,"type":"小车","starting_price":5,"kilometre":0.5,"photo":"http://localhost:8080/img/vehicle/type/small.jpg","remark":"小车"}
       showSelectVehicleType: false,
       vehicleType: null,
+      inProgress:[]  //进行中的行程
     };
   },
   components: {
     UserAvatar
   },
   methods: {
+    endTheTrip(id){
+      httpReq.get({
+        url: urlObj.itinerary.endItinerary+id,
+        success: (res)=>{
+          uni.showToast({
+            title: "行程结束",
+            icon: 'none',
+            duration: 2000,
+          })
+		  this.getInProgress();
+        },
+      })
+    },
+    toChatPage(iteraryId){
+      uni.navigateTo({
+        url: "/pages/index/chat/Chat?iteraryId="+iteraryId
+      })
+    },
+    getInProgress(){
+      httpReq.get({
+        url: urlObj.itinerary.inProgress,
+        success: (res)=>{
+          console.log("查询进行中行程")
+          this.inProgress=res.data.data;
+        }
+      })
+
+    },
     onTouchStart(event) {
       this.startY = event.touches[0].clientY;
       this.savedPolyline = this.polyline; // 保存当前 polyline
@@ -156,12 +190,12 @@ export default {
       item.iconPath = "/static/标记选中.png";
       this.resetCenter(item.latitude, item.longitude);
     },
-    searchRoute() {
+    searchRoute(location) {
       httpReq.post({
         url: urlObj.itinerary.getPlan,
         data: {
           origin: this.userGeocoding.longitude + "," + this.userGeocoding.latitude,
-          destination: this.clickedMarker.longitude + "," + this.clickedMarker.latitude,
+          destination: location,
         },
         success: (res) => {
           this.polylineNum = res.data.data.count;
@@ -292,6 +326,7 @@ export default {
     this.loadAllVehicleType();
   },
   onShow(){
+    this.getInProgress();
     console.log("主菜单 显示")
     uni.$on("receivedChatMessage",this.receivedChatMessageEventCallback)
   },

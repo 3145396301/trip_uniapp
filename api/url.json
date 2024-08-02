@@ -26,8 +26,10 @@
       "getOrder": "/getOrder/",
       "tripHistory": "/tripHistory/",
       "cancelItinerary": "/cancelItineraryById/",
+      "evaluateItinerary": "/evaluateOrUpdateItinerary",
       "delItinerary": "/delItineraryById/",
-      "evaluateItinerary": "/evaluateOrUpdateItinerary"
+      "inProgress":"/findByDriverId",
+      "endItinerary": "/endItinerary/"
     },
     "onLine": {
       "protocol": "ws",
