@@ -13,7 +13,7 @@
         </div>
         <div class="itinerary-body">
           <div class="itinerary-time">{{ itinerary.paymentTime }}</div>
-          <div class="itinerary-cost" v-if="itinerary.status==3">¥{{ itinerary.actualCost.toFixed(2) }}</div>
+<!--          <div class="itinerary-cost" v-if="itinerary.status==3">¥{{ itinerary.actualCost.toFixed(2) }}</div>-->
           <div class="itinerary-route">
             <div class="route-point start">
               <div class="route-dot"></div>
