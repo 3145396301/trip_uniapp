@@ -60,6 +60,12 @@
 			"style": {
 				"navigationBarTitleText": "我的订单"
 			}
+		},
+		{
+			"path": "pages/index/Coupon/Coupon",
+			"style": {
+				"navigationBarTitleText": "优惠券"
+			}
 		}
 	],
 	"globalStyle": {

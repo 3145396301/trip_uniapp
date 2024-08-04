@@ -38,7 +38,6 @@
             <button class="pay-button" v-if="item.status == 0 && item.reason == '行程'" disabled>取消</button>
             <button class="refund-button" v-if="item.status == 1">退款</button>
           </div>
-
         </div>
       </transition>
     </div>
