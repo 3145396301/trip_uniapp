@@ -29,7 +29,16 @@
       "evaluateItinerary": "/evaluateOrUpdateItinerary",
       "delItinerary": "/delItineraryById/",
       "inProgress":"/findByDriverId",
-      "endItinerary": "/endItinerary/"
+      "endItinerary": "/endItinerary/",
+      "takeOrder": "/takeOrder"
+    },
+    "order": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9003,
+      "proxyPrefix": "/orders",
+      "context": "/orders",
+      "getAllOrders": "/findAllOrders"
     },
     "onLine": {
       "protocol": "ws",

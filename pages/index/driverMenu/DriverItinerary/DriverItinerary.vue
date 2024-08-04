@@ -12,7 +12,7 @@
           <span v-if="itinerary.status==5" class="status-text-canceled">进行中</span>
         </div>
         <div class="itinerary-body">
-          <div class="itinerary-time">{{ itinerary.paymentTime }}</div>
+          <div class="itinerary-time">{{ itinerary.createTime }}</div>
 <!--          <div class="itinerary-cost" v-if="itinerary.status==3">¥{{ itinerary.actualCost.toFixed(2) }}</div>-->
           <div class="itinerary-route">
             <div class="route-point start">
@@ -26,10 +26,10 @@
           </div>
         </div>
         <div class="itinerary-footer">
-          <button class="delete-button" v-if="itinerary.status==3">删除行程</button>
+          <button class="delete-button" v-if="itinerary.status==3" @click="delTheTrip(itinerary.id)">删除行程</button>
           <button class="button" v-if="itinerary.status==2||itinerary.status==5" @click="toChatPage(itinerary.id)">联系乘客</button>
-          <button class="button" v-if="itinerary.status==2">开始行程</button>
-          <button class="button" v-if="itinerary.status==5">结束行程</button>
+          <button class="button" v-if="itinerary.status==2" @click="startTheTrip(itinerary.id)">开始行程</button>
+          <button class="button" v-if="itinerary.status==5" @click="endTheTrip(itinerary.id)">结束行程</button>
         </div>
       </div>
       <!-- itinerarys==null||itinerarys.length==0 提示暂无行程 -->
@@ -54,6 +54,49 @@ export default {
     }
   },
   methods:{
+    delTheTrip(id){
+      httpReq.delete({
+        url: urlObj.itinerary.delItinerary+id,
+        success: (res)=>{
+          uni.showToast({
+            title: "删除成功",
+            icon: 'none',
+            duration: 2000,
+          })
+          this.loadMyItinerary();
+        },
+          }
+      )
+
+      },
+    startTheTrip(id){
+      httpReq.post({
+        url: urlObj.itinerary.takeOrder,
+        data:{itineraryId:id},
+        success: (res)=>{
+          uni.showToast({
+            title: "行程开始",
+            icon: 'none',
+            duration: 2000,
+          })
+          this.loadMyItinerary();
+        },
+
+      })
+    },
+    endTheTrip(id){
+      httpReq.get({
+        url: urlObj.itinerary.endItinerary+id,
+        success: (res)=>{
+          uni.showToast({
+            title: "行程结束",
+            icon: 'none',
+            duration: 2000,
+          })
+          this.loadMyItinerary();
+        },
+      })
+    },
     loadMyItinerary(){
       httpReq.get({
         url: urlObj.itinerary.getAllItinerary,
