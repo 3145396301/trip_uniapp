@@ -10,7 +10,8 @@
       "login": "/login",
       "loginTest": "/loginTest",
       "updateCoordinates": "/UpdatingCoordinates",
-      "searchLocation": "/Searching"
+      "searchLocation": "/Searching",
+      "applyForDriver": "/applyForDriver"
     },
     "itinerary": {
       "protocol": "http",
@@ -39,6 +40,22 @@
       "proxyPrefix": "/orders",
       "context": "/orders",
       "getAllOrders": "/findAllOrders"
+    },
+    "upload": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9002,
+      "proxyPrefix": "/upload",
+      "context": "/upload",
+      "uploadImages": "/images"
+    },
+    "realnameInfo": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9002,
+      "proxyPrefix": "/realnameInfo",
+      "context": "/realnameInfo",
+      "isRealName": "/isRealName"
     },
     "onLine": {
       "protocol": "ws",

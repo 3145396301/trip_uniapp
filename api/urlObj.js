@@ -4,6 +4,8 @@ let userBaseUrl = json.serviceUri.user.protocol + "://" + json.serviceUri.user.s
 let itineraryBaseUrl = json.serviceUri.itinerary.protocol + "://" + json.serviceUri.itinerary.serverHost + ":" + json.serviceUri.itinerary.port + json.serviceUri.itinerary.context;
 let onlineBaseUrl = json.serviceUri.onLine.protocol + "://" + json.serviceUri.onLine.serverHost + ":" + json.serviceUri.onLine.port + json.serviceUri.onLine.context;
 let orderBaseUrl = json.serviceUri.order.protocol + "://" + json.serviceUri.order.serverHost + ":" + json.serviceUri.order.port + json.serviceUri.order.context;
+let uploadBaseUrl = json.serviceUri.upload.protocol + "://" + json.serviceUri.upload.serverHost + ":" + json.serviceUri.upload.port + json.serviceUri.upload.context;
+let realnameInfoBaseUrl = json.serviceUri.realnameInfo.protocol + "://" + json.serviceUri.realnameInfo.serverHost + ":" + json.serviceUri.realnameInfo.port + json.serviceUri.realnameInfo.context;
 if (json.proxy===true){
     userBaseUrl = json.serviceUri.user.proxyPrefix+json.serviceUri.user.context;
     itineraryBaseUrl = json.serviceUri.itinerary.proxyPrefix+json.serviceUri.itinerary.context;
@@ -16,6 +18,7 @@ let urlObj={
         updateCoordinates: userBaseUrl+json.serviceUri.user.updateCoordinates,
         searchLocation: userBaseUrl+json.serviceUri.user.searchLocation,
         loginTest: userBaseUrl+json.serviceUri.user.loginTest,
+        applyForDriver: userBaseUrl+json.serviceUri.user.applyForDriver,
     },
     itinerary:{
         getPlan: itineraryBaseUrl+json.serviceUri.itinerary.getPlan,
@@ -37,6 +40,12 @@ let urlObj={
     },
     order:{
         loadMyOrder:orderBaseUrl+json.serviceUri.order.getAllOrders
+    },
+    upload:{
+        uploadImage:uploadBaseUrl+json.serviceUri.upload.uploadImages,
+    },
+    realnameInfo:{
+        isRealName: realnameInfoBaseUrl+json.serviceUri.realnameInfo.isRealName,
     }
 }
 export default urlObj;

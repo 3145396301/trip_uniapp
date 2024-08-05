@@ -8,7 +8,7 @@
       height: funTop + 20 + 'px',
     }" class="map"></map>
     <!-- 头像 -->
-    <div class="avatar-container">
+    <div class="avatar-container" @click="toPersonalCenter">
       <UserAvatar :src="src"></UserAvatar>
     </div>
     <!-- 卡卷、行程 -->
@@ -306,6 +306,11 @@ export default {
     toPageMyCoupon(){
       uni.navigateTo({
         url: "/pages/index/Coupon/Coupon"
+      })
+    },
+    toPersonalCenter(){
+      uni.navigateTo({
+        url: "/pages/index/PersonalCenter/PersonalCenter"
       })
     },
     receivedChatMessageEventCallback(data){

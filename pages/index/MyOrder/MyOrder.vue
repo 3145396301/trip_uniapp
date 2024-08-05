@@ -33,7 +33,7 @@
             <span>退款时间</span><span>{{ item.refundTime }}</span>
           </div>
           <div>
-            <button class="pay-button" v-if="item.status == 0">支付</button>
+            <button class="pay-button" v-if="item.status == 0" >支付</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason != '行程'">取消</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason == '行程'" disabled>取消</button>
             <button class="refund-button" v-if="item.status == 1">退款</button>
