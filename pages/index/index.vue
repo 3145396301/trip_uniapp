@@ -35,6 +35,9 @@ export default {
     uni.navigateTo({
       url: "login/loginPage"
     })
+    // uni.navigateTo({
+    //   url: "/pages/index/PersonalCenter/PersonalCenter"
+    // })
   },
   methods: {
   }

@@ -66,6 +66,12 @@
 			"style": {
 				"navigationBarTitleText": "优惠券"
 			}
+		},
+		{
+			"path": "pages/index/PersonalCenter/PersonalCenter",
+			"style": {
+				"navigationBarTitleText": "个人中心"
+			}
 		}
 	],
 	"globalStyle": {
