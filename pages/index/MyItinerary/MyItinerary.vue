@@ -161,7 +161,7 @@ export default {
     commentSubmit() {
       console.log("评价提交", this.score, this.comment)
       httpReq.post({
-        url: urlObj.itinerary.evaluateItinerary,
+        url: urlObj.evaluate.evaluateItinerary,
         data: {
           itineraryId: this.commentId,
           mark: this.score,

@@ -8,12 +8,12 @@
       height: funTop + 20 + 'px',
     }" class="map"></map>
     <!-- 头像 -->
-    <div class="avatar-container">
+    <div class="avatar-container" @click="toPersonalCenter">
       <UserAvatar :src="src"></UserAvatar>
     </div>
     <!-- 卡卷、行程 -->
     <div class="right-top">
-      <image src="/static/卡卷.png" class="icon"></image>
+      <image src="/static/卡卷.png" class="icon" @click="toPageMyCoupon"></image>
       <image src="/static/行程.png" class="icon" @click="toPageMyIterary"></image>
       <image src="/static/订单.png" class="icon" @click="toPageMyOrder"></image>
     </div>
@@ -393,6 +393,16 @@ export default {
         url: "/pages/index/MyOrder/MyOrder"
       })
 
+    },
+    toPageMyCoupon(){
+      uni.navigateTo({
+        url: "/pages/index/Coupon/Coupon"
+      })
+    },
+    toPersonalCenter(){
+      uni.navigateTo({
+        url: "/pages/index/PersonalCenter/PersonalCenter"
+      })
     },
     receivedChatMessageEventCallback(data){
       uni.showToast({

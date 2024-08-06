@@ -10,6 +10,7 @@ import LoginPage from "./login/loginPage.vue";
 import MainMenu from "./mainMenu/mainMenu.vue";
 import userGeocoding from '../../data/userGeocoding'
 import SystemInfo from "../../data/systemInfo";
+
 uni.getSystemInfo({
   success: function (res) {
     SystemInfo.windowWidth = res.windowWidth;
@@ -35,11 +36,11 @@ export default {
       url: "login/loginPage"
     })
     // uni.navigateTo({
-    //   url: "/pages/index/MyOrder/MyOrder"
+    //   url: "/pages/index/PersonalCenter/PersonalCenter"
     // })
-
   },
-  methods: {}
+  methods: {
+  }
 };
 </script>
 

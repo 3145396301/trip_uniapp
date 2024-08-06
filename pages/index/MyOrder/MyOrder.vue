@@ -33,12 +33,11 @@
             <span>退款时间</span><span>{{ item.refundTime }}</span>
           </div>
           <div>
-            <button class="pay-button" v-if="item.status == 0">支付</button>
+            <button class="pay-button" v-if="item.status == 0" >支付</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason != '行程'">取消</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason == '行程'" disabled>取消</button>
             <button class="refund-button" v-if="item.status == 1">退款</button>
           </div>
-
         </div>
       </transition>
     </div>
@@ -46,70 +45,73 @@
 </template>
 
 <script>
+import httpReq from "../../../util/httpReq";
+import urlObj from "../../../api/urlObj";
+
 export default {
   data() {
     return {
       transactions: [
-        {
-          orderNumber: "1430273106164103",
-          initialCost: 5000.00,
-          actualCost: 5000.00,
-          discountAmount: 0.00,
-          status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-          createTime: "2018-04-29",
-          paymentTime: "2018-04-29 10:06:02",
-          refundTime: "2018-04-29 10:06:02",
-          reason: "行程",
-          expanded: false
-        },
-        {
-          orderNumber: "1430273106164103",
-          initialCost: 5000.00,
-          actualCost: 5000.00,
-          discountAmount: 0.00,
-          status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-          createTime: "2018-04-29",
-          paymentTime: "2018-04-29 10:06:02",
-          refundTime: "",
-          reason: "购买优惠券",
-          expanded: false
-        },
-        {
-          orderNumber: "1430273106164103",
-          initialCost: 5000.00,
-          actualCost: 5000.00,
-          discountAmount: 0.00,
-          status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-          createTime: "2018-04-29",
-          paymentTime: "2018-04-29 10:06:02",
-          refundTime: "",
-          reason: "行程",
-          expanded: false
-        },
-        {
-          orderNumber: "1430273106164103",
-          initialCost: 5000.00,
-          actualCost: 5000.00,
-          discountAmount: 0.00,
-          status: 2, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-          createTime: "2018-04-29",
-          paymentTime: "2018-04-29 10:06:02",
-          refundTime: "",
-          reason: "行程",
-          expanded: false
-        },
-        {
-          orderNumber: "1430273106164103",
-          initialCost: 5000.00,
-          actualCost: 5000.00,
-          discountAmount: 0.00,
-          status: 3, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-          createTime: "2018-04-29",
-          paymentTime: "2018-04-29 10:06:02",
-          refundTime: "",
-          reason: "行程",
-          expanded: false
-        },
+        // {
+        //   orderNumber: "1430273106164103",
+        //   initialCost: 5000.00,
+        //   actualCost: 5000.00,
+        //   discountAmount: 0.00,
+        //   status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+        //   createTime: "2018-04-29",
+        //   paymentTime: "2018-04-29 10:06:02",
+        //   refundTime: "2018-04-29 10:06:02",
+        //   reason: "行程",
+        //   expanded: false
+        // },
+        // {
+        //   orderNumber: "1430273106164103",
+        //   initialCost: 5000.00,
+        //   actualCost: 5000.00,
+        //   discountAmount: 0.00,
+        //   status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+        //   createTime: "2018-04-29",
+        //   paymentTime: "2018-04-29 10:06:02",
+        //   refundTime: "",
+        //   reason: "购买优惠券",
+        //   expanded: false
+        // },
+        // {
+        //   orderNumber: "1430273106164103",
+        //   initialCost: 5000.00,
+        //   actualCost: 5000.00,
+        //   discountAmount: 0.00,
+        //   status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+        //   createTime: "2018-04-29",
+        //   paymentTime: "2018-04-29 10:06:02",
+        //   refundTime: "",
+        //   reason: "行程",
+        //   expanded: false
+        // },
+        // {
+        //   orderNumber: "1430273106164103",
+        //   initialCost: 5000.00,
+        //   actualCost: 5000.00,
+        //   discountAmount: 0.00,
+        //   status: 2, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+        //   createTime: "2018-04-29",
+        //   paymentTime: "2018-04-29 10:06:02",
+        //   refundTime: "",
+        //   reason: "行程",
+        //   expanded: false
+        // },
+        // {
+        //   orderNumber: "1430273106164103",
+        //   initialCost: 5000.00,
+        //   actualCost: 5000.00,
+        //   discountAmount: 0.00,
+        //   status: 3, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
+        //   createTime: "2018-04-29",
+        //   paymentTime: "2018-04-29 10:06:02",
+        //   refundTime: "",
+        //   reason: "行程",
+        //   expanded: false
+        // },
         // 可以添加更多的交易记录
       ]
     };
@@ -117,8 +119,27 @@ export default {
   methods: {
     toggleDetails(index) {
       this.transactions[index].expanded = !this.transactions[index].expanded;
-    }
-  }
+    },
+    loadMyOrder(){
+      httpReq.post({
+        url: urlObj.order.loadMyOrder,
+        data:{
+        },
+        success: (res)=>{
+          console.log(res.data)
+          let data=res.data.data;
+          for(let i=0;i<data.length;i++){
+            data[i].expanded=false;
+          }
+          this.transactions=data;
+        }
+      })
+    },
+  },
+  created() {
+    console.log('MyItinerary created')
+    this.loadMyOrder();
+  },
 };
 </script>
 
