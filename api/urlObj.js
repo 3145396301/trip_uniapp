@@ -6,6 +6,8 @@ let onlineBaseUrl = json.serviceUri.onLine.protocol + "://" + json.serviceUri.on
 let orderBaseUrl = json.serviceUri.order.protocol + "://" + json.serviceUri.order.serverHost + ":" + json.serviceUri.order.port + json.serviceUri.order.context;
 let uploadBaseUrl = json.serviceUri.upload.protocol + "://" + json.serviceUri.upload.serverHost + ":" + json.serviceUri.upload.port + json.serviceUri.upload.context;
 let realnameInfoBaseUrl = json.serviceUri.realnameInfo.protocol + "://" + json.serviceUri.realnameInfo.serverHost + ":" + json.serviceUri.realnameInfo.port + json.serviceUri.realnameInfo.context;
+let representationsBaseUrl = json.serviceUri.representations.protocol + "://" + json.serviceUri.representations.serverHost + ":" + json.serviceUri.representations.port + json.serviceUri.representations.context;
+let evaluateBaseUrl = json.serviceUri.evaluate.protocol + "://" + json.serviceUri.evaluate.serverHost + ":" + json.serviceUri.evaluate.port + json.serviceUri.evaluate.context;
 if (json.proxy===true){
     userBaseUrl = json.serviceUri.user.proxyPrefix+json.serviceUri.user.context;
     itineraryBaseUrl = json.serviceUri.itinerary.proxyPrefix+json.serviceUri.itinerary.context;
@@ -30,7 +32,6 @@ let urlObj={
         tripHistory: itineraryBaseUrl+json.serviceUri.itinerary.tripHistory,
         cancelItinerary: itineraryBaseUrl+json.serviceUri.itinerary.cancelItinerary,
         delItinerary: itineraryBaseUrl+json.serviceUri.itinerary.delItinerary,
-        evaluateItinerary: itineraryBaseUrl+json.serviceUri.itinerary.evaluateItinerary,
         inProgress: itineraryBaseUrl+json.serviceUri.itinerary.inProgress,
         endItinerary: itineraryBaseUrl+json.serviceUri.itinerary.endItinerary,
         takeOrder: itineraryBaseUrl+json.serviceUri.itinerary.takeOrder,
@@ -46,6 +47,13 @@ let urlObj={
     },
     realnameInfo:{
         isRealName: realnameInfoBaseUrl+json.serviceUri.realnameInfo.isRealName,
+    },
+    representations:{
+        saveRepresentations: representationsBaseUrl+json.serviceUri.representations.saveRepresentations,
+        findByItineraryId: representationsBaseUrl+json.serviceUri.representations.findByItineraryId,
+    },
+    evaluate:{
+        evaluateItinerary: evaluateBaseUrl+json.serviceUri.evaluate.evaluateItinerary,
     }
 }
 export default urlObj;

@@ -25,6 +25,7 @@
           车辆品牌:<input type="text" v-model="vehicle.brand">
           车牌号:<input type="text" v-model="vehicle.plate">
           <button class="button" style="width: 15vw;height: 5vh" @tap="uploading">上传</button>
+
 <!--          <select v-model="vehicle.vehicleTypeId" >-->
 <!--            <option value="">请选择车辆类型</option>-->
 <!--            <option v-for="item in vehicleTypeList" :key="item.id" :value="item.id">{{item.type}}</option>-->

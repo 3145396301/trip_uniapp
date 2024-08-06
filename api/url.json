@@ -27,7 +27,6 @@
       "getOrder": "/getOrder/",
       "tripHistory": "/tripHistory/",
       "cancelItinerary": "/cancelItineraryById/",
-      "evaluateItinerary": "/evaluateOrUpdateItinerary",
       "delItinerary": "/delItineraryById/",
       "inProgress":"/findByDriverId",
       "endItinerary": "/endItinerary/",
@@ -56,6 +55,23 @@
       "proxyPrefix": "/realnameInfo",
       "context": "/realnameInfo",
       "isRealName": "/isRealName"
+    },
+    "representations": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9004,
+      "proxyPrefix": "/representations",
+      "context": "/representations",
+      "saveRepresentations": "/saveRepresentations",
+      "findByItineraryId": "/findByItineraryId/"
+    },
+    "evaluate": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9004,
+      "proxyPrefix": "/evaluate",
+      "context": "/evaluate",
+      "evaluateItinerary": "/evaluateOrUpdateItinerary"
     },
     "onLine": {
       "protocol": "ws",
