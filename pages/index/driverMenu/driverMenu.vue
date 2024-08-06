@@ -40,10 +40,10 @@
               <button @click="endTheTrip(item.id)">结束行程</button>
             </div>
           </div>
-
         </div>
+
         <div class="search-box">
-          <h1 style="text-align: center" v-if="inProgress==null||inProgress.length==0">暂无订单</h1>
+          <h1 style="text-align: center" v-if="inProgress==null||inProgress.length===0">暂无订单</h1>
         </div>
         <!-- 路线信息 -->
 <!--        <div v-if="polylineNum != '0'" class="picker-container">-->

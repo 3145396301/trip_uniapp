@@ -39,7 +39,7 @@
           </button>
         </div>
         <!-- 路线信息 -->
-        <div v-if="polylineNum != '0'" class="picker-container">
+        <div v-if="polylineNum !== '0'" class="picker-container">
           <picker mode="selector" :range="paths" range-key="info" @change="displayRoute">
             <view class="picker">
               预览路线
@@ -50,6 +50,17 @@
         <div v-if="clickedMarker != null" class="route-button-container">
           <button class="route-button" @click="calculateEstimatedPrice()">
             发起行程
+          </button>
+        </div>
+        <!-- 预约行程 -->
+        <div v-if="clickedMarker != null" class="route-button-container">
+          <label for="appointmentTime">预约时间：</label>
+          <picker mode="multiSelector" :range="timeRange" @change="onTimeChange">
+            <view class="picker">{{ selectedDate }} {{ selectedTime }}</view>
+          </picker>
+
+          <button class="route-button" @click="calculateEstimatedPrice()">
+            预约行程
           </button>
         </div>
         <!-- 展示车辆类型并选择 -->
@@ -102,12 +113,83 @@ export default {
       vehicleTypeList: [],  // demo:{"id":1,"type":"小车","starting_price":5,"kilometre":0.5,"photo":"http://localhost:8080/img/vehicle/type/small.jpg","remark":"小车"}
       showSelectVehicleType: false,
       vehicleType: null,
+      timeRange: [[], []],
+      selectedDate: '',
+      selectedTime: '',
+      appointmentTime: null,
     };
   },
   components: {
     UserAvatar
   },
+  mounted() {
+    this.initTimeRange();
+  },
   methods: {
+    initTimeRange() {
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const dates = ['今天', '明天', '后天'];
+      let times = [];
+
+      if (minutes < 30) {
+        times.push(`${hours}:30`);
+        for (let i = hours + 1; i < 24; i++) {
+          times.push(`${i}:00`);
+          times.push(`${i}:30`);
+        }
+      } else {
+        for (let i = hours + 1; i < 24; i++) {
+          times.push(`${i}:00`);
+          times.push(`${i}:30`);
+        }
+      }
+
+      this.timeRange = [dates, times];
+      this.selectedDate = dates[0];
+      this.selectedTime = times[0];
+    },
+    updateTimeRange(dateIndex) {
+      const now = new Date();
+      const times = [];
+      if (dateIndex === 0) { // 今天
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        if (minutes < 30) {
+          times.push(`${hours}:30`);
+          for (let i = hours + 1; i < 24; i++) {
+            times.push(`${i}:00`);
+            times.push(`${i}:30`);
+          }
+        } else {
+          for (let i = hours + 1; i < 24; i++) {
+            times.push(`${i}:00`);
+            times.push(`${i}:30`);
+          }
+        }
+      } else { // 明天或后天
+        for (let i = 0; i < 24; i++) {
+          times.push(`${i}:00`);
+          times.push(`${i}:30`);
+        }
+      }
+      this.timeRange[1] = times;
+      if (!times.includes(this.selectedTime)) {
+        this.selectedTime = times[0];
+      }
+    },
+    onTimeChange(e) {
+      const [dateIndex, timeIndex] = e.detail.value;
+      this.updateTimeRange(dateIndex); // 更新时间范围
+      this.selectedDate = this.timeRange[0][dateIndex];
+      this.selectedTime = this.timeRange[1][timeIndex];
+      const now = new Date();
+      const baseDate = new Date(now.getFullYear(), now.getMonth(), now.getDate() + dateIndex);
+      const [hours, minutes] = this.selectedTime.split(':');
+      baseDate.setHours(hours, minutes);
+      this.appointmentTime = baseDate.toISOString();
+    },
     onTouchStart(event) {
       this.startY = event.touches[0].clientY;
       this.savedPolyline = this.polyline; // 保存当前 polyline
@@ -247,20 +329,29 @@ export default {
     },
     startItinerary(){
       console.log("开始发起行程")
+
       httpReq.post({
         url: urlObj.itinerary.startItinerary,
         data: {
           origin: this.userGeocoding.longitude + "," + this.userGeocoding.latitude,
           destination: this.clickedMarker.longitude + "," + this.clickedMarker.latitude,
           vehicleTypeId: this.vehicleType.id,
+          appointmentTime: this.appointmentTime
         },
         success: (res) => {
-          console.log(res.data)
-        },
-        fail: (err) => {
-          console.log(err)
+          if (res.data.code == 200) {
+            uni.showToast({
+              title: '操作成功！',
+              icon: 'success'
+            });
+          } else {
+            uni.showToast({
+              title: '操作失败',
+              icon: 'none'
+            });
+          }
         }
-      })
+      });
     },
     loadAllVehicleType(){
       httpReq.get({
@@ -309,7 +400,7 @@ export default {
         icon: 'none',
         duration: 2000
       })
-    }
+    },
   },
   onLoad() {
     this.loadAllVehicleType();
