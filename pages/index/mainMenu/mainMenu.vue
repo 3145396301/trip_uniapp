@@ -16,6 +16,7 @@
       <image src="/static/卡卷.png" class="icon" @click="toPageMyCoupon"></image>
       <image src="/static/行程.png" class="icon" @click="toPageMyIterary"></image>
       <image src="/static/订单.png" class="icon" @click="toPageMyOrder"></image>
+      <image src="/static/智能助理.png" class="icon" @click="toPageChatAi"></image>
     </div>
     <!-- 滑动上层窗口 -->
     <div class="fun" :style="{ top: funTop + 'px' }" @touchstart="onTouchStart" @touchmove="onTouchMove" @touchend="onTouchEnd">
@@ -402,6 +403,11 @@ export default {
     toPersonalCenter(){
       uni.navigateTo({
         url: "/pages/index/PersonalCenter/PersonalCenter"
+      })
+    },
+    toPageChatAi(){
+      uni.navigateTo({
+        url: "/pages/index/chatAi/chatAi"
       })
     },
     receivedChatMessageEventCallback(data){

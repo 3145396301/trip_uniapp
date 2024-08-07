@@ -95,6 +95,7 @@ export default {
         },
           }
       )
+
       },
     clickRepresentations(id){
       httpReq.get({
@@ -182,6 +183,7 @@ export default {
           }
           this.loadMyItinerary();
         },
+
       })
       this.$refs.popup.close();
       this.tailNumber=""

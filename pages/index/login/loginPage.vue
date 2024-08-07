@@ -1,4 +1,5 @@
 <template>
+
   <view class="container">
     <view class="logo">
       <image src="/static/logo.png" mode="aspectFit"></image>
@@ -12,6 +13,7 @@
     <input style="width: 50%;height: 20px;border: black 1px solid" v-model="userId">
     <button class="phone-login" @click="loginTest">测试登录</button>
   </view>
+
 </template>
 
 <script>
@@ -19,8 +21,10 @@ import urlObj from '../../../api/urlObj'
 import httpReq from "../../../util/httpReq";
 import userInfoData from "../../../data/userInfo";
 import userGeocoding from "../../../data/userGeocoding";
+import Loading from "../Loading/loading.vue";
 
 export default {
+  components: {Loading},
   data() {
     return {
       loginValid: false,

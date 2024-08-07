@@ -1,83 +1,90 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/index/index",
-			"style": {
-				"usingComponents": {
-					"tac" : "/wxcomponents/captcha/index"
-				},
-				
-				"navigationBarTitleText": "uni-app"
-			}
-		},
-		{
-			"path": "pages/index/login/loginPage",
-			"style": {
-				"usingComponents": {
-					"tac" : "/wxcomponents/captcha/index"
-				},
-				"navigationBarTitleText": "登录"
-			}
-		},
-		{
-			"path": "pages/index/mainMenu/mainMenu",
-			"style": {
-				"navigationBarTitleText": "主菜单"
-			}
-		},
-		{
-			"path": "pages/index/MyItinerary/MyItinerary",
-			"style": {
-				"navigationBarTitleText": "我的行程"
-			}
-		},
-		{
-			"path": "pages/index/driverMenu/driverMenu",
-			"style": {
-				"navigationBarTitleText": "司机菜单"
-			}
-		},
-		{
-			"path": "pages/index/driverMenu/nearOrders/nearOrder",
-			"style": {
-				"navigationBarTitleText": "附近行程"
-			}
-		},
-		{
-			"path": "pages/index/driverMenu/DriverItinerary/DriverItinerary",
-			"style": {
-				"navigationBarTitleText": "司机行程"
-			}
-		},
-		{
-			"path": "pages/index/chat/Chat",
-			"style": {
-				"navigationBarTitleText": "联系"
-			}
-		},
-		{
-			"path": "pages/index/MyOrder/MyOrder",
-			"style": {
-				"navigationBarTitleText": "我的订单"
-			}
-		},
-		{
-			"path": "pages/index/Coupon/Coupon",
-			"style": {
-				"navigationBarTitleText": "优惠券"
-			}
-		},
-		{
-			"path": "pages/index/PersonalCenter/PersonalCenter",
-			"style": {
-				"navigationBarTitleText": "个人中心"
-			}
-		}
-	],
-	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#F8F8F8",
-		"backgroundColor": "#F8F8F8"
-	}
+  "pages": [
+    //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+    {
+      "path": "pages/index/index",
+      "style": {
+        "usingComponents": {
+          "tac": "/wxcomponents/captcha/index"
+        },
+        "navigationBarTitleText": "uni-app"
+      }
+    },
+    {
+      "path": "pages/index/login/loginPage",
+      "style": {
+        "usingComponents": {
+          "tac": "/wxcomponents/captcha/index"
+        },
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
+      "path": "pages/index/mainMenu/mainMenu",
+      "style": {
+        "navigationBarTitleText": "主菜单"
+      }
+    },
+    {
+      "path": "pages/index/MyItinerary/MyItinerary",
+      "style": {
+        "navigationBarTitleText": "我的行程"
+      }
+    },
+    {
+      "path": "pages/index/driverMenu/driverMenu",
+      "style": {
+        "navigationBarTitleText": "司机菜单"
+      }
+    },
+    {
+      "path": "pages/index/driverMenu/nearOrders/nearOrder",
+      "style": {
+        "navigationBarTitleText": "附近行程"
+      }
+    },
+    {
+      "path": "pages/index/driverMenu/DriverItinerary/DriverItinerary",
+      "style": {
+        "navigationBarTitleText": "司机行程"
+      }
+    },
+    {
+      "path": "pages/index/chat/Chat",
+      "style": {
+        "navigationBarTitleText": "联系"
+      }
+    },
+    {
+      "path": "pages/index/MyOrder/MyOrder",
+      "style": {
+        "navigationBarTitleText": "我的订单"
+      }
+    },
+    {
+      "path": "pages/index/Coupon/Coupon",
+      "style": {
+        "navigationBarTitleText": "优惠券"
+      }
+    },
+    {
+      "path": "pages/index/PersonalCenter/PersonalCenter",
+      "style": {
+        "navigationBarTitleText": "个人中心"
+      }
+    },
+    {
+      "path": "pages/index/chatAi/chatAi",
+      "style": {
+        "navigationBarTitleText": "出行助手",
+        "enablePullDownRefresh": true
+      }
+    }
+  ],
+  "globalStyle": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "backgroundColor": "#F8F8F8"
+  }
 }

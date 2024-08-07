@@ -80,6 +80,14 @@
       "proxyPrefix": "",
       "context": "",
       "onlineVerification": "/onlineVerification"
+    },
+    "ai": {
+      "protocol": "ws",
+      "serverHost": "127.0.0.1",
+      "port": 9006,
+      "proxyPrefix": "/ai",
+      "context": "",
+      "aiChat": "/ai"
     }
   }
 }

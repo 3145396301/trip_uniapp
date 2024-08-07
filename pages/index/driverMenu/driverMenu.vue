@@ -1,5 +1,7 @@
 <template>
+
   <view class="main-menu" v-if="userGeocoding.isInit">
+    <loading v-if="loading"></loading>
     <!-- 地图 -->
     <map :show-location="true" :markers="markers" :latitude="latitude" :longitude="longitude" :polyline="polyline"
          :style="{
@@ -64,6 +66,7 @@ import UserAvatar from "../mainMenu/components/UserAvatar.vue";
 import SystemInfo from "../../../data/systemInfo";
 import httpReq from "../../../util/httpReq";
 import urlObj from "../../../api/urlObj";
+import Loading from "../Loading/loading.vue";
 
 export default {
   data() {
@@ -85,10 +88,12 @@ export default {
       vehicleTypeList: [],  // demo:{"id":1,"type":"小车","starting_price":5,"kilometre":0.5,"photo":"http://localhost:8080/img/vehicle/type/small.jpg","remark":"小车"}
       showSelectVehicleType: false,
       vehicleType: null,
-      inProgress:[]  //进行中的行程
+      inProgress:[],  //进行中的行程
+      loading: true,
     };
   },
   components: {
+    Loading,
     UserAvatar
   },
   methods: {
@@ -116,6 +121,7 @@ export default {
         success: (res)=>{
           console.log("查询进行中行程")
           this.inProgress=res.data.data;
+          this.loading=false;
         }
       })
 

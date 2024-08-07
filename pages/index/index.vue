@@ -36,7 +36,7 @@ export default {
       url: "login/loginPage"
     })
     // uni.navigateTo({
-    //   url: "/pages/index/PersonalCenter/PersonalCenter"
+    //   url: "/pages/index/chatAi/chatAi"
     // })
   },
   methods: {

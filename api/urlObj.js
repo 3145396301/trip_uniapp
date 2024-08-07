@@ -1,4 +1,5 @@
 
+
 import json from "./url.json";
 let userBaseUrl = json.serviceUri.user.protocol + "://" + json.serviceUri.user.serverHost + ":" + json.serviceUri.user.port + json.serviceUri.user.context;
 let itineraryBaseUrl = json.serviceUri.itinerary.protocol + "://" + json.serviceUri.itinerary.serverHost + ":" + json.serviceUri.itinerary.port + json.serviceUri.itinerary.context;
@@ -8,11 +9,17 @@ let uploadBaseUrl = json.serviceUri.upload.protocol + "://" + json.serviceUri.up
 let realnameInfoBaseUrl = json.serviceUri.realnameInfo.protocol + "://" + json.serviceUri.realnameInfo.serverHost + ":" + json.serviceUri.realnameInfo.port + json.serviceUri.realnameInfo.context;
 let representationsBaseUrl = json.serviceUri.representations.protocol + "://" + json.serviceUri.representations.serverHost + ":" + json.serviceUri.representations.port + json.serviceUri.representations.context;
 let evaluateBaseUrl = json.serviceUri.evaluate.protocol + "://" + json.serviceUri.evaluate.serverHost + ":" + json.serviceUri.evaluate.port + json.serviceUri.evaluate.context;
+let aiBaseUrl = json.serviceUri.ai.protocol + "://" + json.serviceUri.ai.serverHost + ":" + json.serviceUri.ai.port + json.serviceUri.ai.context;
 if (json.proxy===true){
     userBaseUrl = json.serviceUri.user.proxyPrefix+json.serviceUri.user.context;
     itineraryBaseUrl = json.serviceUri.itinerary.proxyPrefix+json.serviceUri.itinerary.context;
     onlineBaseUrl = json.serviceUri.onLine.proxyPrefix+json.serviceUri.onLine.context;
     orderBaseUrl = json.serviceUri.order.proxyPrefix+json.serviceUri.order.context;
+    realnameInfoBaseUrl = json.serviceUri.realnameInfo.proxyPrefix+json.serviceUri.realnameInfo.context;
+    representationsBaseUrl = json.serviceUri.representations.proxyPrefix+json.serviceUri.representations.context;
+    evaluateBaseUrl = json.serviceUri.evaluate.proxyPrefix+json.serviceUri.evaluate.context;
+    uploadBaseUrl = json.serviceUri.upload.proxyPrefix+json.serviceUri.upload.context;
+    aiBaseUrl = json.serviceUri.ai.proxyPrefix+json.serviceUri.ai.context;
 }
 let urlObj={
     user:{
@@ -54,6 +61,10 @@ let urlObj={
     },
     evaluate:{
         evaluateItinerary: evaluateBaseUrl+json.serviceUri.evaluate.evaluateItinerary,
+    },
+    ai:{
+        aiChat: aiBaseUrl+json.serviceUri.ai.aiChat,
     }
+
 }
 export default urlObj;
