@@ -62,6 +62,18 @@
       }
     },
     {
+      "path": "pages/index/MyOrder/Payment/PaymentOrder",
+      "style": {
+        "navigationBarTitleText": "订单支付"
+      }
+    },
+    {
+      "path": "pages/index/PaymentCoupon/PaymentCoupon",
+      "style": {
+        "navigationBarTitleText": "支付优惠卷页面"
+      }
+    },
+    {
       "path": "pages/index/Coupon/Coupon",
       "style": {
         "navigationBarTitleText": "优惠券"
@@ -80,6 +92,7 @@
         "enablePullDownRefresh": true
       }
     }
+
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

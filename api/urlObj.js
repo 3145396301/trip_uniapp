@@ -29,6 +29,9 @@ let urlObj={
         searchLocation: userBaseUrl+json.serviceUri.user.searchLocation,
         loginTest: userBaseUrl+json.serviceUri.user.loginTest,
         applyForDriver: userBaseUrl+json.serviceUri.user.applyForDriver,
+        findUserUsableCoupon: userBaseUrl+json.serviceUri.user.findUserUsableCoupon,
+        decreaseCoupon: userBaseUrl+json.serviceUri.user.decreaseCoupon,
+
     },
     itinerary:{
         getPlan: itineraryBaseUrl+json.serviceUri.itinerary.getPlan,
@@ -48,7 +51,10 @@ let urlObj={
         onlineVerification: onlineBaseUrl+json.serviceUri.onLine.onlineVerification
     },
     order:{
-        loadMyOrder:orderBaseUrl+json.serviceUri.order.getAllOrders
+        loadMyOrder:orderBaseUrl+json.serviceUri.order.getAllOrders,
+        paymentOrders:orderBaseUrl+json.serviceUri.order.paymentOrders,
+        computeActualCost:orderBaseUrl+json.serviceUri.order.computeActualCost,
+        refundOrders:orderBaseUrl+json.serviceUri.order.refundOrders,
     },
     upload:{
         uploadImage:uploadBaseUrl+json.serviceUri.upload.uploadImages,

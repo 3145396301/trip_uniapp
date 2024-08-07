@@ -33,14 +33,26 @@
             <span>退款时间</span><span>{{ item.refundTime }}</span>
           </div>
           <div>
-            <button class="pay-button" v-if="item.status == 0" >支付</button>
+            <button class="pay-button" v-if="item.status == 0" @click="toPagePaymentOrder(item)">支付</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason != '行程'">取消</button>
             <button class="pay-button" v-if="item.status == 0 && item.reason == '行程'" disabled>取消</button>
-            <button class="refund-button" v-if="item.status == 1">退款</button>
+            <button class="refund-button" v-if="item.status == 1" @click="clickRefund(item.id)">退款</button>
           </div>
         </div>
       </transition>
     </div>
+    <!--  退款弹窗   -->
+    <uni-popup ref="popover" background-color="#fff">
+      <view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }">
+        <div style="margin-bottom: 1vh">
+          订单退款
+        </div>
+        <div style="margin-bottom: 2vh">
+          退款原因:<textarea type="text" v-model="refund.reason"></textarea>
+        </div>
+        <button class="button" style="width: 15vw;height: 5vh" @click="Refund">提交</button>
+      </view>
+    </uni-popup>
   </div>
 </template>
 
@@ -51,72 +63,30 @@ import urlObj from "../../../api/urlObj";
 export default {
   data() {
     return {
-      transactions: [
-        // {
-        //   orderNumber: "1430273106164103",
-        //   initialCost: 5000.00,
-        //   actualCost: 5000.00,
-        //   discountAmount: 0.00,
-        //   status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-        //   createTime: "2018-04-29",
-        //   paymentTime: "2018-04-29 10:06:02",
-        //   refundTime: "2018-04-29 10:06:02",
-        //   reason: "行程",
-        //   expanded: false
-        // },
-        // {
-        //   orderNumber: "1430273106164103",
-        //   initialCost: 5000.00,
-        //   actualCost: 5000.00,
-        //   discountAmount: 0.00,
-        //   status: 0, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-        //   createTime: "2018-04-29",
-        //   paymentTime: "2018-04-29 10:06:02",
-        //   refundTime: "",
-        //   reason: "购买优惠券",
-        //   expanded: false
-        // },
-        // {
-        //   orderNumber: "1430273106164103",
-        //   initialCost: 5000.00,
-        //   actualCost: 5000.00,
-        //   discountAmount: 0.00,
-        //   status: 1, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-        //   createTime: "2018-04-29",
-        //   paymentTime: "2018-04-29 10:06:02",
-        //   refundTime: "",
-        //   reason: "行程",
-        //   expanded: false
-        // },
-        // {
-        //   orderNumber: "1430273106164103",
-        //   initialCost: 5000.00,
-        //   actualCost: 5000.00,
-        //   discountAmount: 0.00,
-        //   status: 2, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-        //   createTime: "2018-04-29",
-        //   paymentTime: "2018-04-29 10:06:02",
-        //   refundTime: "",
-        //   reason: "行程",
-        //   expanded: false
-        // },
-        // {
-        //   orderNumber: "1430273106164103",
-        //   initialCost: 5000.00,
-        //   actualCost: 5000.00,
-        //   discountAmount: 0.00,
-        //   status: 3, // 订单状态 0:未支付 1:已支付 2:已退款 3:已取消
-        //   createTime: "2018-04-29",
-        //   paymentTime: "2018-04-29 10:06:02",
-        //   refundTime: "",
-        //   reason: "行程",
-        //   expanded: false
-        // },
-        // 可以添加更多的交易记录
-      ]
+      transactions: [],
+      refund:{}
     };
   },
   methods: {
+    clickRefund(id){
+      this.refund.ordersId=id;
+      this.$refs.popover.open('center')
+    },
+    Refund(){
+      httpReq.post({
+        url: urlObj.order.refundOrders,
+        data:this.refund,
+        success: (res)=>{
+          uni.showToast({
+            title: "退款成功",
+            icon: 'none',
+            duration: 2000,
+          })
+          this.$refs.popover.close();
+          this.loadMyOrder();
+        }
+      })
+    },
     toggleDetails(index) {
       this.transactions[index].expanded = !this.transactions[index].expanded;
     },
@@ -133,6 +103,11 @@ export default {
           }
           this.transactions=data;
         }
+      })
+    },
+    toPagePaymentOrder(item){
+      uni.navigateTo({
+        url: `/pages/index/MyOrder/Payment/PaymentOrder?orderNumber=${item.orderNumber}&createTime=${item.createTime}&fee=${item.initialCost}&orderId=${item.id}&couponId=${item.couponId}&total=${item.initialCost}&couponValue=0`
       })
     },
   },
@@ -269,5 +244,32 @@ export default {
   line-height: 3vh;
   display: inline-block;
   margin: 10px;
+}
+.popup-content {
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 63vw;
+  height: 30vh;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+textarea {
+  border: 3px #c3ac8b solid;
+  border-radius: 10px;
+  width: 100%;
+  height: 120px;
+  box-sizing: border-box;
+}
+.button {
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 20vw;
+  font-size: 12px;
+  height: 5vh;
 }
 </style>

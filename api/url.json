@@ -11,7 +11,9 @@
       "loginTest": "/loginTest",
       "updateCoordinates": "/UpdatingCoordinates",
       "searchLocation": "/Searching",
-      "applyForDriver": "/applyForDriver"
+      "applyForDriver": "/applyForDriver",
+      "findUserUsableCoupon": "/coupon/findUserUsableCoupon",
+      "decreaseCoupon": "/coupon/decreaseCoupon"
     },
     "itinerary": {
       "protocol": "http",
@@ -38,7 +40,10 @@
       "port": 9003,
       "proxyPrefix": "/orders",
       "context": "/orders",
-      "getAllOrders": "/findAllOrders"
+      "getAllOrders": "/findAllOrders",
+      "paymentOrders": "/paymentOrders",
+      "computeActualCost": "/computeActualCost",
+      "refundOrders": "/refundOrders"
     },
     "upload": {
       "protocol": "http",
