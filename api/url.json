@@ -88,6 +88,15 @@
       "proxyPrefix": "/ai",
       "context": "",
       "aiChat": "/ai"
+    },
+    "chat": {
+      "protocol": "http",
+      "serverHost": "127.0.0.1",
+      "port": 9006,
+      "proxyPrefix": "/ai",
+      "context": "/ai",
+      "getHistoricalMessages": "/getHistoricalMessages"
     }
+
   }
 }

@@ -39,7 +39,7 @@
             联系司机
           </button>
           <button class="again-button" v-if="itinerary.status==3">再来一单</button>
-          <button class="button" v-if="itinerary.status==3" @click="clickComment(itinerary.id)">评价/投诉</button>
+          <button class="button" v-if="itinerary.status==3&&itinerary.appraise" @click="clickComment(itinerary.id)">评价/投诉</button>
           <button class="button" v-if="itinerary.status==1" @click="cancelItinerary(itinerary.id)">取消行程</button>
         </div>
       </div>

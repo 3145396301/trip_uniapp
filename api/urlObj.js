@@ -10,6 +10,7 @@ let realnameInfoBaseUrl = json.serviceUri.realnameInfo.protocol + "://" + json.s
 let representationsBaseUrl = json.serviceUri.representations.protocol + "://" + json.serviceUri.representations.serverHost + ":" + json.serviceUri.representations.port + json.serviceUri.representations.context;
 let evaluateBaseUrl = json.serviceUri.evaluate.protocol + "://" + json.serviceUri.evaluate.serverHost + ":" + json.serviceUri.evaluate.port + json.serviceUri.evaluate.context;
 let aiBaseUrl = json.serviceUri.ai.protocol + "://" + json.serviceUri.ai.serverHost + ":" + json.serviceUri.ai.port + json.serviceUri.ai.context;
+let chatBaseUrl = json.serviceUri.chat.protocol + "://" + json.serviceUri.chat.serverHost + ":" + json.serviceUri.chat.port + json.serviceUri.chat.context;
 if (json.proxy===true){
     userBaseUrl = json.serviceUri.user.proxyPrefix+json.serviceUri.user.context;
     itineraryBaseUrl = json.serviceUri.itinerary.proxyPrefix+json.serviceUri.itinerary.context;
@@ -63,7 +64,10 @@ let urlObj={
         evaluateItinerary: evaluateBaseUrl+json.serviceUri.evaluate.evaluateItinerary,
     },
     ai:{
-        aiChat: aiBaseUrl+json.serviceUri.ai.aiChat,
+        aiChat: aiBaseUrl+json.serviceUri.ai.aiChat
+    },
+    chat:{
+        getHistoricalMessages: chatBaseUrl+json.serviceUri.chat.getHistoricalMessages,
     }
 
 }

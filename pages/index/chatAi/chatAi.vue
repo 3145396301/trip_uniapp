@@ -42,6 +42,8 @@
 <script>
 import httpReq from "@/util/httpReq";
 import AiChat from "@/util/AiChat";
+import HttpReq from "../../../util/httpReq";
+import urlObj from "../../../api/urlObj";
 
 export default {
   data() {
@@ -63,14 +65,25 @@ export default {
           record.gpt = data.data;
         })
         this.newMessage = '';
-
       }
+    },
+    getHistoricalMessages(){
+      HttpReq.get({
+        url: urlObj.chat.getHistoricalMessages,
+        success: (res) => {
+          console.log(res.data)
+          this.chats = res.data.data;
+        }
+      })
     },
     directSendMessage(text) {
       this.newMessage = text;
       this.sendMessage();
     },
   },
+  created() {
+    this.getHistoricalMessages();
+  }
 };
 </script>
 
